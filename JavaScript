@@ -1,0 +1,57 @@
+// Sunucumuzun adresi. Artık canlı yayında olduğu için boş bırakıyoruz.
+const apiUrl = '';
+
+// API'den sistem durumunu getiren fonksiyon
+async function getSistemDurumu() {
+    try {
+        const response = await fetch(`${apiUrl}/sistem-durumu`);
+        const data = await response.json();
+        
+        // Gelen veriyi okunabilir bir JSON formatına dönüştürüp ekrana yazdırıyoruz
+        document.getElementById('api-output').textContent = JSON.stringify(data, null, 2);
+    } catch (error) {
+        console.error('API isteği sırasında bir hata oluştu:', error);
+        document.getElementById('api-output').textContent = 'API ile bağlantı kurulamadı.';
+    }
+}
+
+// Yapay zeka ile etkileşimi yöneten fonksiyon
+async function gonderAiMesaj() {
+    const inputElement = document.getElementById('ai-mesaj-input');
+    const outputElement = document.getElementById('ai-yanit-output');
+    
+    const mesaj = inputElement.value;
+    if (!mesaj) {
+        outputElement.textContent = 'Lütfen bir mesaj yazın.';
+        return;
+    }
+    
+    outputElement.textContent = 'Cevap bekleniyor...';
+    
+    try {
+        const response = await fetch(`${apiUrl}/ai-etkilesim`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ mesaj: mesaj })
+        });
+        
+        const data = await response.json();
+        
+        outputElement.textContent = `Yapay Zeka Yanıtı: ${data.yanıt}`;
+        inputElement.value = ''; // Mesaj kutusunu temizle
+        
+    } catch (error) {
+        console.error('AI isteği sırasında bir hata oluştu:', error);
+        outputElement.textContent = 'API ile iletişimde hata.';
+    }
+}
+
+
+// Butonlara tıklama olaylarını ekliyoruz
+document.getElementById('sistem-durumu-guncelle-btn').addEventListener('click', getSistemDurumu);
+document.getElementById('ai-gonder-btn').addEventListener('click', gonderAiMesaj);
+
+// Sayfa yüklendiğinde sistem durumunu otomatik olarak çekiyoruz
+getSistemDurumu();

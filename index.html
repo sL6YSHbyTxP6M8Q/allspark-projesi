@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Allspark Kontrol Paneli</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Allspark Sistem Durumu</h1>
+        <button id="sistem-durumu-guncelle-btn">Durumu Güncelle</button>
+    </header>
+
+    <main>
+        <section class="api-output">
+            <h2>API Çıktısı</h2>
+            <pre id="api-output">Sistem durumu yükleniyor...</pre>
+        </section>
+        
+        <section class="ai-etkilesim">
+            <h2>Yapay Zeka ile Etkileşim</h2>
+            <input type="text" id="ai-mesaj-input" placeholder="Bir mesaj yaz...">
+            <button id="ai-gonder-btn">Gönder</button>
+            <div id="ai-yanit-output"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
