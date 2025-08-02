@@ -1,4 +1,4 @@
-const apiUrl = 'https://allspark-projesi-git-main-vercell-s-projects.vercel.app';
+const apiUrl = 'https://allspark-projesi-obt3p59pv-vercell-s-projects.vercel.app';
 
 async function getSistemDurumu() {
     try {
